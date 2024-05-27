@@ -7,6 +7,8 @@
 
 import React from 'react';
 import type {PropsWithChildren} from 'react';
+import {NativeModules} from 'react-native';
+
 import {
   SafeAreaView,
   ScrollView,
@@ -16,6 +18,7 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import PSPDFKitView, {PSPDFKit} from 'react-native-pspdfkit';
 
 import {
   Colors,
@@ -28,6 +31,8 @@ import {
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
+
+const pspdfkit = NativeModules.PSPDFKit;
 
 function Section({children, title}: SectionProps): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -62,6 +67,14 @@ function App(): React.JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  React.useEffect(() => {
+    if (pspdfkit) {
+      pspdfkit.setLicenseKey(null);
+    }
+
+    console.log('PSPDFKit is ', PSPDFKit ? 'enabled ✅' : 'disabled ⚠️');
+  }, []);
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
@@ -72,6 +85,7 @@ function App(): React.JSX.Element {
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
         <Header />
+        <PSPDFKitView document="https://pdfobject.com/pdf/sample.pdf" />
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,

@@ -10,11 +10,23 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url 'https://customers.pspdfkit.com/maven/'
+        }
     }
     dependencies {
         classpath("com.android.tools.build:gradle")
         classpath("com.facebook.react:react-native-gradle-plugin")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
+    }
+    
+    allprojects {
+        repositories {
+            mavenLocal()
+            maven {
+                url 'https://customers.pspdfkit.com/maven/'
+            }
+        }
     }
 }
 
