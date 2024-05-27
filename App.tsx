@@ -85,7 +85,7 @@ function App(): React.JSX.Element {
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
         <Header />
-        <PSPDFKitView document="https://pdfobject.com/pdf/sample.pdf" />
+        {/* <PSPDFKitView document="https://pdfobject.com/pdf/sample.pdf" /> */}
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
